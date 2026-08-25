@@ -4,7 +4,7 @@ import LoginData from '../testdata/LoginData.json';
 import LoginPage from '../pages/LoginPage';
 import logout from '../pages/logout';
 
-test.describe('login test case',()=> {
+test.describe('logout test case',()=> {
 test("Checkout testcase", async ({ page }) => {
  
     const login = new LoginPage(page);
@@ -17,9 +17,11 @@ test("Checkout testcase", async ({ page }) => {
     await expect(login.message).toHaveText(data.message);
     await attachstepscreenshot(page,'05-welcome message should be displayed');
 });
+     await test.step('logout',async()=>{
     const LogOut = new logout(page);
- 
     await LogOut.logout();
+     await attachstepscreenshot(page,'after logout');
+});
  
 });
 });

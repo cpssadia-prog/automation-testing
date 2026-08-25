@@ -1,3 +1,5 @@
+import { test, expect } from '../fixtures/testSetup.js';
+import { attachstepscreenshot } from '../utilities/screenshot.js';
 class Checkout {
     constructor(page) {
         this.page = page;
@@ -20,25 +22,50 @@ class Checkout {
         this.completeHeader = page.locator('[data-test="complete-header"]');
     }
     // Enter checkout information
+   
     async EnterInformation(firstName, lastName, postalCode) {
-        await this.firstName.fill(firstName);
-        await this.lastName.fill(lastName);
-        await this.postalCode.fill(postalCode);
+     await test.step('after add to cart', async () => {
+        await attachstepscreenshot(this.page, 'checkout page');
+         });
+        await test.step('Enter firstname', async () => {
+            await this.firstName.fill(firstName);
+            await attachstepscreenshot(this.page, 'After firstaname');
+         });
+         await test.step('Enter lastname', async () => {
+            await this.lastName.fill(lastName);
+             await attachstepscreenshot(this.page, 'After firstaname');
+          });
+          await test.step('Enter postal code', async () => {
+             await this.postalCode.fill(postalCode);
+              await attachstepscreenshot(this.page, 'after postalcode');
+           });
     }
- 
+   
     async continueButton() {
+        await test.step('click continue button', async () => {
         await this.continueBtn.click();
+         await attachstepscreenshot(this.page, 'after continue button');
+           });
     }
     async gotoCheckoutOverview() {
+        await test.step('click checkout overview page', async () => {
         await this.page.waitForURL('**/checkout-step-two.html');
+          await attachstepscreenshot(this.page, 'after checkout overview page');
+           });
     }
-    // Click Finish
+
     async finishButton() {
+        await test.step('click finish button', async () => {
         await this.finishBtn.click();
+         await attachstepscreenshot(this.page, 'after finish button');
+           });
     }
     // Get order completion message
     async getCompleteMessage() {
+        await test.step('complete message', async () => {
         return await this.completeHeader.textContent();
+         await attachstepscreenshot(this.page, 'after complete page');
+           });
     }
 }
 export default Checkout;

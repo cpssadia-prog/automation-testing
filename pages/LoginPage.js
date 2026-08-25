@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test, expect } from '../fixtures/testSetup.js';
 import { attachstepscreenshot } from '../utilities/screenshot.js';
 
 class LoginPage{

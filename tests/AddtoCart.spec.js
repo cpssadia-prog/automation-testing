@@ -5,7 +5,8 @@ import LoginPage from '../pages/LoginPage';
 import AddtoCart from '../pages/AddtoCart';
 import cartdata from '../testdata/cartdata.json';
 import logout from '../pages/logout';
-test.describe('login test case',()=> {
+
+test.describe('Add to Cart',()=> {
 test('Login and add multiple products to cart', async ({ page }) => {
 
     const login = new LoginPage(page);
@@ -20,12 +21,14 @@ test('Login and add multiple products to cart', async ({ page }) => {
     await expect(login.message).toHaveText(data.message);
     await attachstepscreenshot(page,'05-welcome message should be displayed');
 });
-    await addToCart.addMultipleItemsToCart(
-        cartdata.products
-    );
-    const cartCount =
-        await addToCart.getCartCount();
-    await expect(cartCount).toBe('6');
+   await test.step('Add to cart',async()=>{
+    await addToCart.addMultipleItemsToCart( cartdata.products );
+      });
+ await test.step('cart count',async()=>{
+    const cartCount = await addToCart.getCartCount();
+    await expect(cartCount).toBe(cartdata.products.length.toString());
+     await attachstepscreenshot(page,'cart count should be displayed');
+     });
      const LogOut = new logout(page);
      await LogOut.logout();
 });

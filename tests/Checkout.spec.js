@@ -9,7 +9,7 @@ import CheckoutData from '../testdata/checkoutdata.json';
 import Checkout from '../pages/checkout';
 import logout from '../pages/logout';
 
- test.describe('login test case',()=> {
+ test.describe('Checkout page',()=> {
 test('Login, Add Product and Checkout', async ({ page }) => {
  
     const login = new LoginPage(page);
@@ -25,31 +25,55 @@ test('Login, Add Product and Checkout', async ({ page }) => {
     await attachstepscreenshot(page,'05-welcome message should be displayed');
 });
 
-    await addToCart.addMultipleItemsToCart(cartdata.products);
- 
+      await test.step('Add to cart',async()=>{
+    await addToCart.addMultipleItemsToCart( cartdata.products );
+      });
+   await test.step('cart count',async()=>{
     const cartCount = await addToCart.getCartCount();
-    const expectedCount = cartdata.products.length.toString();
-    await expect(cartCount).toBe(expectedCount);
-
+    await expect(cartCount).toBe(cartdata.products.length.toString());
+     await attachstepscreenshot(page,'cart count should be displayed');
+     });
+   await test.step(' click cart icon',async()=>{
     await addToCart.clickCartIcon();
+    await attachstepscreenshot(page,'cart icon displayed');
+     });
+      await test.step(' click checkout',async()=>{
     await addToCart.clickCheckout();
- 
+   await attachstepscreenshot(page,'after checkout');
+     });
+
+await test.step('Enter checkout information', async () => {
     await checkOut.EnterInformation(
         info.firstName,
         info.lastName,
         info.postalCode
     );
+
+    await attachstepscreenshot(page, 'after checkout information');
+});
+   await test.step('click continue button', async () => {
     await checkOut.continueButton();
+    await attachstepscreenshot(page, 'after continue');
+});
+    await test.step('click checkout overview', async () => {
     await checkOut.gotoCheckoutOverview();
+    await attachstepscreenshot(page, 'after checkout button');
+});
+
+     await test.step('overview detials', async () => {
     await expect(checkOut.checkoutOverviewPageTitle).toHaveText(checkOut.checkoutOverviewTitle );
    
     await expect(checkOut.quantity).toHaveText(Array(cartdata.products.length).fill('1'));
     await expect(checkOut.paymentinfo).toBeVisible();
     await expect(checkOut.shipping).toBeVisible();
     await expect(checkOut.totalprice).toBeVisible();
+    await attachstepscreenshot(page, 'overview details will be displayed');
+}); 
+   await test.step('click finish button', async () => {
     await checkOut.finishButton();
     await expect(checkOut.thankyouOrder).toHaveText('Thank you for your order!');
- 
+ await attachstepscreenshot(page, 'order completion message will be displayed');
+}); 
     const logOut = new logout(page);
     await logOut.logout();
     await expect(logOut.username).toBeVisible();

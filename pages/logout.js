@@ -1,3 +1,5 @@
+import { test, expect } from '../fixtures/testSetup.js';
+import { attachstepscreenshot } from '../utilities/screenshot.js';
 class logout{
  
     constructor(page){
@@ -12,12 +14,17 @@ class logout{
         this.resetBtn = page.locator('#reset_sidebar_link')
  
     }
- 
     async logout() {
+        await test.step('click menu button', async () => {
         await this.menuBtn.click();
+         await attachstepscreenshot(this.page, 'after menu button');
+    });
+       await test.step('click logout', async () => {
         await this.logoutBtn.click();
+         await attachstepscreenshot(this.page, 'after logout button');
+    });
     }
- 
+   
     async allItemsButton(){
         await this.menuBtn.click();
         await this.allItemsBtn.click();

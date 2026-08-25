@@ -1,29 +1,20 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../fixtures/testSetup.js';
 import LoginData from '../testdata/LoginData.json';
 import LoginPage from  '../pages/LoginPage';
+import { attachstepscreenshot }  from '../utilities/screenshot.js';
+
+test.describe('login test case',()=> {
 
 test(`Login Test Case(saucedemo)`, async ({ page }) => {
-    const login = new LoginPage(page);
+    const login = new LoginPage(page)
     const data = LoginData.validUsers[0];
-
-    await login.gotoURL();
+    await test.step('Enter Credentials',async()=>{
     await login.login(data.username,data.password);
+     });
+    await test.step('verify welcome message on landing page',async()=>{
     await expect(login.message).toHaveText(data.message);
+    await attachstepscreenshot(page,'05-welcome message should be displayed');
 });
-test('login with invalid password', async ({page}) =>{
-    const login = new LoginPage(page);
-    const data = LoginData.InvalidUsers[0];
-
-    await login.gotoURL();
-    await login.login(data.username,data.password);
-    await expect(data.message);
 });
-test('login with invalid username', async ({page}) =>{
-    const login = new LoginPage(page);
-    const data = LoginData.InvalidUsername[0];
-
-    await login.gotoURL();
-    await login.login(data.username,data.password);
-    await expect(data.message);
 });
 

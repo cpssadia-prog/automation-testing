@@ -18,3 +18,25 @@ test(`Login Test Case(saucedemo)`, async ({ page }) => {
 });
 });
 
+test.describe('Negative Login Test Case', () => {
+
+  test('Login with Invalid Credentials', async ({ page }) => {
+
+    const login = new LoginPage(page);
+    const data = LoginData.InvalidUsers[0];
+
+    await test.step('Enter Invalid Credentials', async () => {
+      await login.login(data.username, data.password);
+    });
+
+    await test.step('Verify Error Message', async () => {
+      await expect(login.errorMessage).toHaveText(data.message);
+      await attachstepscreenshot(
+        page,
+        '05-error message should be displayed'
+      );
+    });
+
+  });
+
+});

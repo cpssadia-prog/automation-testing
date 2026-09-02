@@ -1,0 +1,19 @@
+{
+  "registerUser": {
+    "fullname": "Sadia Shaikh",
+    "email": "sadia@test.com",
+    "username": "sadia_test",
+    "password": "Test@12345"
+  },
+
+  "putUser": {
+    "fullname": "Sadia Updated",
+    "email": "sadia_updated@test.com",
+    "username": "sadia_updated"
+  },
+
+  "patchUser": {
+    "fullname": "Sadia Patched",
+    "email": "sadia_patch@test.com"
+  }
+}

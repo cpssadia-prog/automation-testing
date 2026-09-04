@@ -5,9 +5,9 @@ import LoginPage from '../pages/LoginPage';
 import AddtoCart from '../pages/AddtoCart';
 import cartdata from '../testdata/cartdata.json';
 
-import CheckoutData from '../testdata/checkoutdata.json';
-import Checkout from '../pages/checkout';
-import logout from '../pages/logout';
+import checkoutData from '../testdata/checkoutdata.json';
+import Checkout from '../pages/Checkout.js';
+import logout from '../pages/logout.js';
 
  test.describe('Checkout page',()=> {
 test('Login, Add Product and Checkout', async ({ page }) => {
@@ -15,7 +15,7 @@ test('Login, Add Product and Checkout', async ({ page }) => {
     const login = new LoginPage(page);
     const addToCart = new AddtoCart(page);
     const checkOut = new Checkout(page);
-    const info = CheckoutData.validInformation[0];
+    const info = checkoutData.validInformation[0];
     const data = LoginData.validUsers[0];
     await test.step('Enter Credentials',async()=>{
     await login.login(data.username,data.password);

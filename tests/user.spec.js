@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
 
-import { UserAPI } from '../Pages/userAPI.js';
+import { UserAPI } from '../pages/userAPI.js';
 
 
 // POST - Register

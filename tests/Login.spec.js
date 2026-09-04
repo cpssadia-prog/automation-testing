@@ -1,6 +1,6 @@
 import { test, expect } from '../fixtures/testSetup.js';
 import LoginData from '../testdata/LoginData.json';
-import LoginPage from  '../pages/LoginPage';
+import LoginPage from '../pages/LoginPage.js';
 import { attachstepscreenshot }  from '../utilities/screenshot.js';
 
 test.describe('login test case',()=> {
@@ -31,6 +31,7 @@ test.describe('Negative Login Test Case', () => {
 
     await test.step('Verify Error Message', async () => {
       await expect(login.errorMessage).toHaveText(data.message);
+
       await attachstepscreenshot(
         page,
         '05-error message should be displayed'
@@ -40,3 +41,5 @@ test.describe('Negative Login Test Case', () => {
   });
 
 });
+
+

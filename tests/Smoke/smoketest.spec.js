@@ -5,7 +5,7 @@ import LoginPage from '../../pages/LoginPage.js';
 import AddtoCart from '../../pages/AddtoCart.js';
 import cartdata from '../../testdata/cartdata.json';
 import CheckoutData from '../../testdata/checkoutdata.json';
-import Checkout from '../../pages/checkout.js';
+import Checkout from '../../pages/Checkout.js';
 import logout from '../../pages/logout.js';
 
  test.describe('smoke page',()=> {

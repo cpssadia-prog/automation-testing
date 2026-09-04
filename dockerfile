@@ -8,13 +8,13 @@ WORKDIR /app
 COPY package*.json ./ 
  
 # Install dependencies 
-RUN npm install 
+RUN npm ci
  
 # Copy all files 
 COPY . . 
  
 # Install Playwright browsers 
-RUN npx playwright install --with-deps chromium
+//RUN npx playwright install --with-deps chromium
  
 # Run tests 
 CMD ["npx", "playwright", "test"] 
